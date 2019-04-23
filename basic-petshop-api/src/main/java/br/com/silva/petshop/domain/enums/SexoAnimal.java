@@ -1,5 +1,8 @@
 package br.com.silva.petshop.domain.enums;
 
+/**
+ * @author Danilo Silva
+ */
 public enum SexoAnimal {
 
     FEMEA("FÊMEA"), MACHO("MACHO");

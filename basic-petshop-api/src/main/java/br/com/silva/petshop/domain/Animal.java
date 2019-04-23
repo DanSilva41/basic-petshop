@@ -9,6 +9,9 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * @author Danilo Silva
+ */
 @Entity
 @Table(name = "animal")
 public class Animal implements Serializable {
@@ -27,12 +30,13 @@ public class Animal implements Serializable {
     @Column(name = "dt_nascimento")
     private LocalDate dataNascimento;
 
+    @Size(min = 3, max = 120)
     @Column(name = "cor")
     private String cor;
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "sexo")
+    @Column(name = "sexo", nullable = false)
     private SexoAnimal sexo;
 
     @NotNull
@@ -76,9 +80,6 @@ public class Animal implements Serializable {
         this.dataNascimento = dataNascimento;
     }
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
-    @Column(name = "sexo")
     public SexoAnimal getSexo() {
         return sexo;
     }
@@ -87,7 +88,6 @@ public class Animal implements Serializable {
         this.sexo = sexo;
     }
 
-    @Column
     public String getCor() {
         return cor;
     }
@@ -96,9 +96,6 @@ public class Animal implements Serializable {
         this.cor = cor;
     }
 
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name="codigo_especie")
     public Especie getEspecie() {
         return especie;
     }

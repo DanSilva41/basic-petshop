@@ -6,14 +6,26 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * @author Danilo Silva
+ */
 @Entity
 @Table(name = "especie")
 public class Especie implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
+
+    @NotNull
+    @Size(min = 3, max = 120)
+    @Column(name = "nome", unique = true, nullable = false)
     private String nome;
+
+    @Size(min = 5, max = 255)
+    @Column(name = "descricao")
     private String descricao;
 
     public Especie() {
@@ -25,8 +37,6 @@ public class Especie implements Serializable {
         this.descricao = descricao;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getCodigo() {
         return codigo;
     }
@@ -35,9 +45,6 @@ public class Especie implements Serializable {
         this.codigo = codigo;
     }
 
-    @NotNull
-    @Size(min = 3, max = 120)
-    @Column
     public String getNome() {
         return nome;
     }
@@ -46,8 +53,6 @@ public class Especie implements Serializable {
         this.nome = nome;
     }
 
-    @Size(min = 5, max = 255)
-    @Column
     public String getDescricao() {
         return descricao;
     }
