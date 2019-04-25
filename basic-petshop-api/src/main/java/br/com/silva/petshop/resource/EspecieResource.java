@@ -1,6 +1,7 @@
 package br.com.silva.petshop.resource;
 
 import br.com.silva.petshop.domain.Especie;
+import br.com.silva.petshop.resource.util.HeaderUtil;
 import br.com.silva.petshop.service.EspecieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -42,8 +43,8 @@ public class EspecieResource {
      */
     @GetMapping("/{codigo}")
     public ResponseEntity<?> buscarPeloCodigo(@PathVariable Long codigo) {
-        Optional<Especie> especieSalva = this.especieService.buscarPorCodigo(codigo);
-        return especieSalva.isPresent() ? ResponseEntity.ok(especieSalva.get()) : ResponseEntity.notFound().build();
+        Optional<Especie> especieRetornada = this.especieService.buscarPorCodigo(codigo);
+        return especieRetornada.isPresent() ? ResponseEntity.ok(especieRetornada.get()) : ResponseEntity.notFound().build();
     }
 
     /**
@@ -56,7 +57,10 @@ public class EspecieResource {
     @PostMapping
     public ResponseEntity<Especie> cadastrar(@RequestBody @Valid Especie especie) throws URISyntaxException {
         Especie especieSalva = this.especieService.salvar(especie);
+
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}").buildAndExpand(especieSalva.getCodigo()).toUri();
-        return ResponseEntity.created(uri).body(especieSalva);
+        return ResponseEntity.created(uri)
+                .headers(HeaderUtil.criarAlerta("animal.criado", especieSalva.getCodigo().toString()))
+                .body(especieSalva);
     }
 }

@@ -1,6 +1,7 @@
 package br.com.silva.petshop.resource;
 
 import br.com.silva.petshop.domain.Animal;
+import br.com.silva.petshop.resource.util.HeaderUtil;
 import br.com.silva.petshop.service.AnimalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -42,8 +43,8 @@ public class AnimalResource {
      */
     @GetMapping("/{codigo}")
     public ResponseEntity<?> buscarPeloCodigo(@PathVariable Long codigo) {
-        Optional<Animal> animalSalvo = this.animalService.buscarPorCodigo(codigo);
-        return animalSalvo.isPresent() ? ResponseEntity.ok(animalSalvo.get()) : ResponseEntity.notFound().build();
+        Optional<Animal> animalRetornado = this.animalService.buscarPorCodigo(codigo);
+        return animalRetornado.isPresent() ? ResponseEntity.ok(animalRetornado.get()) : ResponseEntity.notFound().build();
     }
 
     /**
@@ -56,8 +57,11 @@ public class AnimalResource {
     @PostMapping
     public ResponseEntity<Animal> cadastrar(@RequestBody @Valid Animal animal) throws URISyntaxException {
         Animal animalSalvo = this.animalService.salvar(animal);
+
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}").buildAndExpand(animalSalvo.getCodigo()).toUri();
-        return ResponseEntity.created(uri).body(animalSalvo);
+        return ResponseEntity.created(uri)
+                .headers(HeaderUtil.criarAlerta("animal.criado", animalSalvo.getCodigo().toString()))
+                .body(animalSalvo);
     }
 }
 

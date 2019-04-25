@@ -28,4 +28,8 @@ public class AnimalService {
         return this.animalRepository.findById(codigo);
     }
 
+    public void remover(Long codigo) {
+        this.animalRepository.delete(this.buscarPorCodigo(codigo).get());
+    }
+
 }
