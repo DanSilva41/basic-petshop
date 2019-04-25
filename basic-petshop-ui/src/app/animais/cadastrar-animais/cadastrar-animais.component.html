@@ -1,0 +1,52 @@
+<section class="content">
+  <div class="container">
+     <div class="row clearfix">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+           <div class="card">
+              <div class="header">
+                 <h2><strong>Cadastrar Animal</strong></h2>
+              </div>
+              <form #f="ngForm" (ngSubmit)="cadastrar()">
+                 <div class="body">
+                    <div class="row clearfix">
+                       <div class="col-lg-6 col-md-6 col-sm-12">
+                          <div class="form-group">
+                             <input type="text" class="form-control" placeholder="Nome" name="nome" [(ngModel)]="animal.nome"/>
+                          </div>
+                          <div class="form-group">
+                             <input type="text" class="form-control" placeholder="RGA" name="rga" [(ngModel)]="animal.rga"/>
+                          </div>
+                          <div class="form-group">
+                              <select class="form-control show-tick" name="sexo" [(ngModel)]="animal.sexoAnimal">
+                                <option [value]="">Selecione...</option>
+                                <option *ngFor="let s of sexoAnimal" [value]="s.value">{{s.label}}</option>
+                              </select>
+                          </div>
+                          <div class="form-group">
+                             <input type="date" class="form-control" placeholder="Data de Nascimento" name="dtNascimento" [(ngModel)]="animal.dtNascimento">
+                          </div>
+                       </div>
+                       <div class="col-lg-6 col-md-6 col-sm-12">
+                          <div class="form-group">
+                              <select class="form-control show-tick" name="raca" [(ngModel)]="animal.raca.codigo">
+                                <option [value]="">Selecione...</option>
+                                <option *ngFor="let r of racas" [value]="r.codigo">{{r.nome}}</option>
+                              </select>
+                          </div>
+                          <div class="form-group">
+                             <input type="text" class="form-control" placeholder="Cor" name="cor" [(ngModel)]="animal.cor">
+                          </div>
+                       </div>
+                    </div>
+                    <div class="row clearfix">
+                       <div class="col-lg-4 col-md-4 col-sm-6">
+                          <button type="submit" class="btn btn-primary">Salvar</button>
+                       </div>
+                    </div>
+                 </div>
+              </form>
+           </div>
+        </div>
+     </div>
+  </div>
+</section>
