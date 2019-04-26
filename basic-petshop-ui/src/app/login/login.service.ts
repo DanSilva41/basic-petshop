@@ -11,15 +11,7 @@ export class LoginService {
   constructor(private http: HttpClient) {
   }
 
-  listar() {
-    return this.http.get<any>(`${this.URL}/api/animais`);
-  }
-
-  buscarPeloCodigo(codigo) {
-    return this.http.get<any>(`${this.URL}/api/animais/${codigo}`);
-  }
-
-  cadastrar(animal) {
-    return this.http.post<any>(`${this.URL}/api/animais`, animal);
+  logar(usuario: string, senha: string) {
+    return this.http.post<any>(`${this.URL}/api/autenticacao`, usuario);
   }
 }

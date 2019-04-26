@@ -6,12 +6,14 @@ import {HttpClientModule} from '@angular/common/http';
 import { LoginService} from './login.service';
 import { AuthComponent } from './auth/auth.component';
 import { LoginRoutingModule } from './login-routing.module';
+import { FormsModule } from "@angular/forms";
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
-    LoginRoutingModule
+    LoginRoutingModule,
+    FormsModule
   ],
   exports: [
     AuthComponent

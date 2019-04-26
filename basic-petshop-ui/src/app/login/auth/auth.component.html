@@ -1,58 +1,52 @@
 <body class="theme-purple">
-  <div class="authentication">
-      <div class="container">
-  
-<div class="col-md-12 content-center">
-  <div class="row clearfix">
-      <div class="col-lg-6 col-md-12">
+<div class="authentication">
+  <div class="container">
+
+    <div class="col-md-12 content-center">
+      <div class="row clearfix">
+        <div class="col-lg-6 col-md-12">
           <div class="company_detail" style="text-align: center">
-              <h3 class="logo"><img src="../assets/images/logo.svg" alt="Logo"> AMAPLAN</h3>
-              <h3>Associação <strong>Amor Animal</strong> de Planaltina de Goiás</h3>
-              <p><i>"...pessoas inconformadas com o descaso e abandono ao qual alguns animais estão sujeitos e que tomaram para si a responsabilidade sobre a vida e guardam estes animais até que sejam adotados!"</i></p>                        
-              <div class="footer">
-                  <ul  class="social_link list-unstyled">
-                      <li><a href="https://thememakker.com" title="ThemeMakker"><i class="zmdi zmdi-globe"></i></a></li>
-                      <li><a href="https://themeforest.net/user/thememakker" title="Themeforest"><i class="zmdi zmdi-shield-check"></i></a></li>
-                      <li><a href="https://www.linkedin.com/company/thememakker/" title="LinkedIn"><i class="zmdi zmdi-linkedin"></i></a></li>
-                      <li><a href="https://www.facebook.com/thememakkerteam" title="Facebook"><i class="zmdi zmdi-facebook"></i></a></li>
-                      <li><a href="http://twitter.com/thememakker" title="Twitter"><i class="zmdi zmdi-twitter"></i></a></li>
-                      <li><a href="http://plus.google.com/+thememakker" title="Google plus"><i class="zmdi zmdi-google-plus"></i></a></li>
-                      <li><a href="https://www.behance.net/thememakker" title="Behance"><i class="zmdi zmdi-behance"></i></a></li>
-                  </ul>
-                  <hr>
-                  <ul class="list-unstyled">
-                      <li><a href="http://thememakker.com/contact/" target="_blank">Contate-nos</a></li>
-                      <li><a href="http://thememakker.com/about/" target="_blank">Sobre nós</a></li>
-                      <li><a href="http://thememakker.com/services/" target="_blank">Atividades</a></li>
-                      <li><a href="javascript:void(0);">FAQ</a></li>
-                  </ul>
-              </div>
+            <h3 class="logo"><img src="../assets/images/logo.svg" alt="Logo"> PETSHOP</h3>
+            <h3>CRUD BÁSICO <strong>PETSHOP</strong> ENTREVISTA GLOBAL WEB</h3>
+            <p><i>"A imaginação é mais importante que a ciência, porque a ciência é limitada, ao passo que a imaginação
+              abrange o mundo inteiro!"</i></p>
+            <div class="footer">
+              <ul class="social_link list-unstyled">
+                <li><a href="https://github.com/DanSilva41" title="Themeforest" target="_blank"><i
+                  class="zmdi zmdi-github"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/dansilva41/" title="LinkedIn" target="_blank"><i
+                  class="zmdi zmdi-linkedin"></i></a></li>
+                <li><a href="https://www.facebook.com/thememakkerteam" title="Facebook" target="_blank"><i
+                  class="zmdi zmdi-facebook"></i></a></li>
+                <li><a href="https://twitter.com/dansilva41" title="Twitter" target="_blank"><i
+                  class="zmdi zmdi-twitter"></i></a></li>
+              </ul>
+              <hr>
+            </div>
           </div>
-      </div>                        
-      <div class="col-lg-5 col-md-12 offset-lg-1">
+        </div>
+        <div class="col-lg-5 col-md-12 offset-lg-1">
           <div class="card-plain">
-              <div class="header">
-                  <h5>Acessar</h5>
+            <div class="header">
+              <h5>Acessar</h5>
+            </div>
+            <form #f="ngForm" class="form">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Nome de usuário" [required]="true">
+                <span class="input-group-addon"><i class="zmdi zmdi-account-circle"></i></span>
               </div>
-              <form class="form">
-                  <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Nome de usuário">
-                      <span class="input-group-addon"><i class="zmdi zmdi-account-circle"></i></span>
-                  </div>
-                  <div class="input-group">
-                      <input type="password" placeholder="Senha" class="form-control" />
-                      <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
-                  </div>                            
-              </form>
-              <div class="footer">
-                  <a href="index.html" class="btn btn-primary btn-round btn-block">Entrar</a>
-                  <a href="sign-up.html" class="btn btn-primary btn-simple btn-round btn-block">Registrar-se</a>
+              <div class="input-group">
+                <input type="password" placeholder="Senha" class="form-control" [required]="true"/>
+                <span class="input-group-addon"><i class="zmdi zmdi-lock"></i></span>
               </div>
-              <a href="forgot-password.html" class="link">Esqueceu a senha?</a>
+            </form>
+            <div class="footer">
+              <button type="submit" class="btn btn-primary btn-round btn-block" [disabled]="!f.valid">Entrar</button>
+            </div>
           </div>
+        </div>
       </div>
+    </div>
   </div>
-  </div>
-  </div>
-  </div>
+</div>
 </body>
