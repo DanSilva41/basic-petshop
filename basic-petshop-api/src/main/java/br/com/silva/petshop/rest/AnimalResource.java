@@ -1,7 +1,7 @@
-package br.com.silva.petshop.resource;
+package br.com.silva.petshop.rest;
 
 import br.com.silva.petshop.domain.Animal;
-import br.com.silva.petshop.resource.util.HeaderUtil;
+import br.com.silva.petshop.rest.util.HeaderUtil;
 import br.com.silva.petshop.service.AnimalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

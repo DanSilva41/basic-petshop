@@ -1,4 +1,4 @@
-package br.com.silva.petshop.resource.util;
+package br.com.silva.petshop.rest.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
