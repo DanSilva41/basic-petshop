@@ -7,11 +7,17 @@ import { PaginaNaoEncontradaComponent } from "./pagina-nao-encontrada/pagina-nao
 import { AnimaisService } from "../animais/animais.service";
 import { LoginService } from "../login/login.service";
 import { EspeciesService} from "../especies/especies.service";
+import { GrowlModule } from "primeng/growl";
+import {ConfirmationService, ConfirmDialogModule, MessageService} from "primeng/primeng";
+import {Title} from "@angular/platform-browser";
 
 @NgModule({
     imports: [
         CommonModule,
-        RouterModule
+        RouterModule,
+
+        GrowlModule,
+        ConfirmDialogModule
     ],
     declarations: [
       NavbarComponent,
@@ -21,12 +27,18 @@ import { EspeciesService} from "../especies/especies.service";
     exports: [
         NavbarComponent,
         TopnavbarComponent,
-        PaginaNaoEncontradaComponent
+        PaginaNaoEncontradaComponent,
+        GrowlModule,
+        ConfirmDialogModule
     ],
     providers: [
         AnimaisService,
         EspeciesService,
-        LoginService
+        LoginService,
+
+        ConfirmationService,
+        MessageService,
+        Title
     ]
 })
 export class CoreModule {   }

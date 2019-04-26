@@ -1,6 +1,7 @@
 {
   "name": "basic-petshop-ui",
   "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -22,6 +23,11 @@
     "@angular/router": "^6.1.0",
     "core-js": "^2.5.4",
     "moment": "^2.22.2",
+    "font-awesome": "^4.7.0",
+    "ng2-currency-mask": "^4.1.0",
+    "ng2-toasty": "^4.0.3",
+    "primeicons": "^1.0.0",
+    "primeng": "^7.0.0",
     "rxjs": "~6.2.0",
     "zone.js": "~0.8.26"
   },
