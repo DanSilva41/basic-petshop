@@ -2,11 +2,16 @@ package br.com.silva.petshop.service.mapper;
 
 import br.com.silva.petshop.domain.Animal;
 import br.com.silva.petshop.service.dto.AnimalDTO;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Mapeador para a entidade Animal e seu DTO chamado AnimalDTO.
+ */
+@Service
 public class AnimalMapper {
 
     public AnimalDTO animalParaAnimalDTO(Animal animal) {
@@ -15,8 +20,8 @@ public class AnimalMapper {
 
     public List<AnimalDTO> animaisParaAnimalDTOs(List<Animal> animais) {
         return animais.stream()
-                .filter(Objects.nonNull())
-                .map(this::animaisParaAnimalDTOs)
+                .filter(Objects::nonNull)
+                .map(this::animalParaAnimalDTO)
                 .collect(Collectors.toList());
     }
 
@@ -30,6 +35,7 @@ public class AnimalMapper {
             animal.setDataNascimento(animalDTO.getDataNascimento());
             animal.setCor(animalDTO.getCor());
             animal.setSexo(animalDTO.getSexo());
+            animal.setEspecie(animalDTO.getEspecie());
             return animal;
         }
     }

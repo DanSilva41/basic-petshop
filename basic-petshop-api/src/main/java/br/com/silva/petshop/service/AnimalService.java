@@ -1,35 +1,20 @@
 package br.com.silva.petshop.service;
 
-import br.com.silva.petshop.domain.Animal;
-import br.com.silva.petshop.repository.AnimalRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import br.com.silva.petshop.service.dto.AnimalDTO;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-@Transactional
-public class AnimalService {
+public interface AnimalService {
 
-    @Autowired
-    private AnimalRepository animalRepository;
+    AnimalDTO salvar(AnimalDTO animalDTO);
 
-    public Animal salvar(Animal animal) {
-        return this.animalRepository.save(animal);
-    }
+    AnimalDTO atualizar(AnimalDTO animalDTO);
 
-    public List<Animal> buscarTodos() {
-        return (List<Animal>) this.animalRepository.findAll();
-    }
+    List<AnimalDTO> buscarTodos();
 
-    public Optional<Animal> buscarPorCodigo(Long codigo) {
-        return this.animalRepository.findById(codigo);
-    }
+    Optional<AnimalDTO> buscarPorCodigo(Long codigo);
 
-    public void remover(Long codigo) {
-        this.animalRepository.delete(this.buscarPorCodigo(codigo).get());
-    }
+    void remover(Long codigo);
 
 }

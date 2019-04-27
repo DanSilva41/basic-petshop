@@ -20,8 +20,8 @@ public class EspecieMapper {
 
     public List<EspecieDTO> especiesParaEspecieDTOs(List<Especie> especies) {
         return especies.stream()
-                .filter(Objects.nonNull())
-                .map(this::especiesParaEspecieDTOs)
+                .filter(Objects::nonNull)
+                .map(this::especieParaEspecieDTO)
                 .collect(Collectors.toList());
     }
 

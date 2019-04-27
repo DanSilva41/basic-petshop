@@ -3,6 +3,8 @@ package br.com.silva.petshop.service.dto;
 import br.com.silva.petshop.domain.Animal;
 import br.com.silva.petshop.domain.Especie;
 import br.com.silva.petshop.domain.enums.SexoAnimal;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -21,6 +23,8 @@ public class AnimalDTO {
     @Size(min = 3, max = 120)
     private String nome;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DateTimeFormat.ISO.DATE_TIME)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate dataNascimento;
 
     @Size(min = 3, max = 120)

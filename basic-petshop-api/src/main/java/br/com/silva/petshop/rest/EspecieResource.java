@@ -1,10 +1,8 @@
 package br.com.silva.petshop.rest;
 
-import br.com.silva.petshop.domain.Especie;
 import br.com.silva.petshop.rest.util.HeaderUtil;
 import br.com.silva.petshop.service.EspecieService;
 import br.com.silva.petshop.service.dto.EspecieDTO;
-import br.com.silva.petshop.service.mapper.EspecieMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,9 +25,6 @@ public class EspecieResource {
     @Autowired
     private EspecieService especieService;
 
-    @Autowired
-    private EspecieMapper especieMapper;
-
     /**
      * GET  /api/especies : buscar todas as espécies.
      *
@@ -37,7 +32,7 @@ public class EspecieResource {
      */
     @GetMapping
     public List<EspecieDTO> listar() {
-        return especieMapper.especiesParaEspecieDTOs(this.especieService.buscarTodos());
+        return this.especieService.buscarTodos();
     }
 
     /**
@@ -47,25 +42,41 @@ public class EspecieResource {
      * @return a ResponseEntity com status 201 (Criado) e com o corpo da espécie correspondente
      */
     @GetMapping("/{codigo}")
-    public ResponseEntity<?> buscarPeloCodigo(@PathVariable Long codigo) {
-        Optional<Especie> especieRetornada = this.especieService.buscarPorCodigo(codigo);
-        return especieRetornada.isPresent() ? ResponseEntity.ok(especieMapper.especieParaEspecieDTO(especieRetornada.get())) : ResponseEntity.notFound().build();
+    public ResponseEntity<EspecieDTO> buscarPeloCodigo(@PathVariable Long codigo) {
+        Optional<EspecieDTO> especieRetornada = this.especieService.buscarPorCodigo(codigo);
+        return especieRetornada.isPresent() ? ResponseEntity.ok(especieRetornada.get()) : ResponseEntity.notFound().build();
     }
 
     /**
      * POST  /api/especies : Cria uma nova espécie.
      *
-     * @param especie a espécie a ser criada
+     * @param especieDTO a espécie a ser criada
      * @return a ResponseEntity com status 201 (Criado) e com o corpo da nova espécie
      * @throws URISyntaxException se a sintaxe do URI de localização estiver incorreta
      */
     @PostMapping
-    public ResponseEntity<EspecieDTO> cadastrar(@RequestBody @Valid Especie especie) throws URISyntaxException {
-        Especie especieSalva = this.especieService.salvar(especie);
+    public ResponseEntity<EspecieDTO> cadastrar(@Valid @RequestBody EspecieDTO especieDTO) throws URISyntaxException {
+        EspecieDTO especieSalva = this.especieService.salvar(especieDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}").buildAndExpand(especieSalva.getCodigo()).toUri();
         return ResponseEntity.created(uri)
                 .headers(HeaderUtil.criarAlerta("animal.criado", especieSalva.getCodigo().toString()))
-                .body(especieMapper.especieParaEspecieDTO(especieSalva));
+                .body(especieSalva);
+    }
+
+    /**
+     * PUT  /api/especies : Atualizar uma espécie.
+     *
+     * @param especieDTO a espécie a ser atualizada
+     * @return a ResponseEntity com status 200 (OK) e com o corpo da espécie atualizado
+     * @throws URISyntaxException se a sintaxe do URI de localização estiver incorreta
+     */
+    @PutMapping
+    public ResponseEntity<EspecieDTO> atualizarEspecie(@RequestBody @Valid EspecieDTO especieDTO) throws URISyntaxException {
+        EspecieDTO especieAtualizada = this.especieService.atualizar(especieDTO);
+
+        return ResponseEntity.ok()
+                .headers(HeaderUtil.criarAlerta("especie.atualizado", especieAtualizada.getCodigo().toString()))
+                .body(especieAtualizada);
     }
 }
