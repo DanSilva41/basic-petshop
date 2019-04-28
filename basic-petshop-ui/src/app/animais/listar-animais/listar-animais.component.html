@@ -43,25 +43,49 @@
                 </div>
                 <div class="body">
                    <div class="table-responsive">
-                      <table class="table table-hover">
+                      <table class="table table-hover text-center">
                          <thead>    
                             <tr>
                                <th>#</th>
                                <th>NOME</th>
-                               <th>RGA</th>
+                               <th>DATA NASCIMENTO</th>
                                <th>SEXO</th>
                                <th>COR</th>
-                               <th>RAÇA</th>
+                               <th>ESPÉCIE</th>
+                               <th>AÇÕES</th>
                             </tr>
                          </thead>
                          <tbody>
                            <tr *ngFor="let animal of animais">
                               <th scope="row">{{animal.codigo}}</th>
-                              <td>{{animal.nome}}</td>
-                              <td>{{animal.rga}}</td>
-                              <td>{{animal.sexoAnimal}}</td>
+                              <td><a [routerLink]="[animal.codigo]">{{animal.nome}}</a></td>
+                              <td>{{animal.dataNascimento | date: 'dd/MM/yyyy'}}</td>
+                              <td>{{animal.sexo}}</td>
                               <td>{{animal.cor}}</td>
-                              <td>{{animal.raca.nome}}</td>
+                              <td>{{animal.especie.nome}}</td>
+                              <td>
+                                 <div class="btn-group flex-btn-group-container">
+                                     <button type="submit"
+                                             [routerLink]="['/', animal.codigo]"
+                                             class="btn btn-info btn-sm">
+                                         <span class="fa fa-eye"></span>
+                                         <span class="hidden-md-down">Visualizar</span>
+                                     </button>
+                                     <button type="submit"
+                                             [routerLink]="['/', { outlets: { popup: 'user-management/'+ animal.codigo + '/edit'} }]"
+                                             replaceUrl="true"
+                                             class="btn btn-primary btn-sm">
+                                         <span class="fa fa-pencil"></span>
+                                         <span class="hidden-md-down">Editar</span>
+                                     </button>
+                                     <button (click)="openConfirmationModal(animal)"
+                                             class="btn btn-danger btn-sm">
+                                         <span class="fa fa-remove"></span>
+                                         <span class="hidden-md-down">Remover</span>
+                                     </button>
+                                 </div>
+                             </td>
+             
                            </tr>
                          </tbody>
                       </table>

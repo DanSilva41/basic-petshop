@@ -49,12 +49,13 @@
                                <th>#</th>
                                <th>NOME</th>
                                <th>DESCRIÇÃO</th>
+                               <th>AÇÕES</th>
                             </tr>
                          </thead>
                          <tbody>
                            <tr *ngFor="let especie of especies">
                               <th scope="row">{{especie.codigo}}</th>
-                              <td>{{especie.nome}}</td>
+                              <td><a [routerLink]="[especie.codigo]">{{especie.nome}}</a></td>
                              <td>{{especie.descricao}}</td>
                            </tr>
                          </tbody>

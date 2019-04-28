@@ -7,6 +7,7 @@ import { NgModule } from '@angular/core';
 const routes: Routes = [
   { path: '', component: ListarEspeciesComponent },
   { path: 'novo', component: CadastrarEspeciesComponent},
+  { path: ':codigo', component: CadastrarEspeciesComponent},
 
 ];
 

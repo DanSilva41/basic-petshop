@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import {environment} from '../../environments/environment';
+import { Especie } from '../core/models';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,10 @@ export class EspeciesService {
     return this.http.get<any>(this.URL);
   }
 
-  buscarPeloCodigo(codigo) {
-    return this.http.get<any>(`${this.URL}/${codigo}`);
+  buscarPeloCodigo(codigo): Promise<Especie>{
+    return this.http.get<any>(`${this.URL}/${codigo}`)
+      .toPromise()
+      .then(response => response as Especie);
   }
 
   cadastrar(especie) {

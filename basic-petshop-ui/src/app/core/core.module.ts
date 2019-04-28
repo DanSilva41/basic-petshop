@@ -1,44 +1,44 @@
-import { NgModule, LOCALE_ID } from "@angular/core";
-import { CommonModule, registerLocaleData } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from "./navbar/navbar.component";
 import { TopnavbarComponent } from "./topnavbar/topnavbar.component";
 import { PaginaNaoEncontradaComponent } from "./pagina-nao-encontrada/pagina-nao-encontrada.component";
 import { AnimaisService } from "../animais/animais.service";
 import { LoginService } from "../login/login.service";
 import { EspeciesService} from "../especies/especies.service";
-import { GrowlModule } from "primeng/growl";
-import {ConfirmationService, ConfirmDialogModule, MessageService} from "primeng/primeng";
-import {Title} from "@angular/platform-browser";
+import { ConfirmationModalService } from "../shared/confirmation-modal/confirmation-modal.service";
+import { ConfirmationModalComponent } from "../shared/confirmation-modal/confirmation-modal.component";
+import { AppComponent } from "../app.component";
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule,
 
-        GrowlModule,
-        ConfirmDialogModule
+        NgbModule.forRoot()
     ],
     declarations: [
       NavbarComponent,
       TopnavbarComponent,
-      PaginaNaoEncontradaComponent
+      PaginaNaoEncontradaComponent,
+      ConfirmationModalComponent
     ],
+    bootstrap:    [ AppComponent ],
     exports: [
         NavbarComponent,
         TopnavbarComponent,
         PaginaNaoEncontradaComponent,
-        GrowlModule,
-        ConfirmDialogModule
+        ConfirmationModalComponent
     ],
     providers: [
         AnimaisService,
         EspeciesService,
         LoginService,
-
-        ConfirmationService,
-        MessageService,
-        Title
-    ]
+        
+        ConfirmationModalService
+    ],
+    entryComponents: [ ConfirmationModalComponent ]
 })
 export class CoreModule {   }

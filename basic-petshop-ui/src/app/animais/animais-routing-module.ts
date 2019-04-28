@@ -6,8 +6,14 @@ import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   { path: '', component: ListarAnimaisComponent },
-  { path: 'novo', component: CadastrarAnimaisComponent},
+  { path: 'novo', component: CadastrarAnimaisComponent}
+];
 
+const dialogRoutes: Routes = [
+  { 
+    path: 'animais/:codigo/delete', 
+    component: CadastrarAnimaisComponent 
+  }
 ];
 
 @NgModule({
@@ -18,3 +24,5 @@ const routes: Routes = [
 })
 export class AnimaisRoutingModule {
 }
+
+

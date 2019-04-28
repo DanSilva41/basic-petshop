@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AnimaisService} from '../animais.service';
-import {Animal} from '../../core/models';
+import {Animal, Especie} from '../../core/models';
+import { Router, ActivatedRoute } from '@angular/router';
+import { EspeciesService } from 'src/app/especies/especies.service';
 
 @Component({
   selector: 'app-cadastrar-animais',
@@ -9,29 +11,39 @@ import {Animal} from '../../core/models';
 })
 export class CadastrarAnimaisComponent implements OnInit {
 
+  animal = new Animal();
+  especies: Array<Especie>;
   sexoAnimal = [{value: 'FEMEA', label: 'FÊMEA'}, {value: 'MACHO', label: 'MACHO'}];
 
-  animal = new Animal();
-
-  racas: Array<any>;
-
-  constructor(private animaisService: AnimaisService) { }
+  constructor(private animaisService: AnimaisService,
+              private especiesService: EspeciesService,
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
-    this.listarRacas();
+    const codigoAnimal = this.route.snapshot.params['codigo'];
+    
+    if(codigoAnimal) {
+      this.animaisService.buscarPeloCodigo(codigoAnimal)
+        .then(animalRetornado => {
+          this.animal = animalRetornado;
+        });
+    }
+    this.listarEspecies();
   }
 
   cadastrar() {
     this.animaisService.cadastrar(this.animal)
       .subscribe(response => {
         console.log('Cadastrado com sucesso!');
+        this.router.navigate(['/animais']);
       });
   }
 
-  private listarRacas() {
-    this.animaisService.listarRacas()
+  private listarEspecies() {
+    this.especiesService.listarEspecies()
       .subscribe(response => {
-        this.racas = response;
+        this.especies = response;
       });
   }
 }

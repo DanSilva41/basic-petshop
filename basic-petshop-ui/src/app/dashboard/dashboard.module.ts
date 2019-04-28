@@ -1,7 +1,7 @@
-import {NgModule} from "../../../node_modules/@angular/core";
-import {CommonModule} from "../../../node_modules/@angular/common";
 import {DashboardRoutingModule} from "./dashboard-routing.module.";
 import {DashboardComponent} from "./dashboard/dashboard.component";
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
   imports: [

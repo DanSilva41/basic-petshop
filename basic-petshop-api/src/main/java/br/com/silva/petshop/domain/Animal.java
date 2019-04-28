@@ -1,6 +1,8 @@
 package br.com.silva.petshop.domain;
 
 import br.com.silva.petshop.domain.enums.SexoAnimal;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -41,6 +43,7 @@ public class Animal implements Serializable {
 
     @NotNull
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name="codigo_especie")
     private Especie especie;
 

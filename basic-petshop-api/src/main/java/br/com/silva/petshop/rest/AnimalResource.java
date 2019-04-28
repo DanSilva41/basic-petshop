@@ -1,6 +1,5 @@
 package br.com.silva.petshop.rest;
 
-import br.com.silva.petshop.domain.Animal;
 import br.com.silva.petshop.rest.util.HeaderUtil;
 import br.com.silva.petshop.service.AnimalService;
 import br.com.silva.petshop.service.dto.AnimalDTO;
@@ -12,7 +11,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,7 +38,7 @@ public class AnimalResource {
     /**
      * GET  /api/animais/{codigo} : buscar animal pelo código.
      *
-     * @param codigo o código da animal a ser buscado
+     * @param codigo o código do animal a ser buscado
      * @return a ResponseEntity com status 201 (Criado) e com o corpo do animal correspondente
      */
     @GetMapping("/{codigo}")
@@ -80,6 +78,21 @@ public class AnimalResource {
         return ResponseEntity.ok()
                 .headers(HeaderUtil.criarAlerta("animal.atualizado", animalAtualizado.getCodigo().toString()))
                 .body(animalAtualizado);
+    }
+
+    /**
+     * DELETE /api/animais : Remover um animal.
+     *
+     * @param codigo o código animal a ser deletado
+     * @return a ResponseEntity com status 200 (OK)
+     * @throws URISyntaxException se a sintaxe do URI de localização estiver incorreta
+     */
+    @DeleteMapping("/{codigo}")
+    public ResponseEntity<Void> removerAnimal(@PathVariable Long codigo) throws URISyntaxException {
+        this.animalService.remover(codigo);
+
+        return ResponseEntity.ok()
+                .headers(HeaderUtil.criarAlerta("animal.removido", String.valueOf(codigo))).build();
     }
 }
 

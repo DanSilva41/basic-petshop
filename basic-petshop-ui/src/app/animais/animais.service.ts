@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
+import { Animal } from '../core/models';
 
 @Injectable({
   providedIn: 'root'
@@ -18,12 +19,10 @@ export class AnimaisService {
     return this.http.get<any>(this.URL);
   }
 
-  listarRacas() {
-    return this.http.get<any>(`${environment.apiHost}/api/racas`);
-  }
-
-  buscarPeloCodigo(codigo) {
-    return this.http.get<any>(`${this.URL}/${codigo}`);
+  buscarPeloCodigo(codigo): Promise<Animal> {
+    return this.http.get<any>(`${this.URL}/${codigo}`)
+      .toPromise()
+      .then(response => response as Animal);
   }
 
   cadastrar(animal) {

@@ -79,4 +79,19 @@ public class EspecieResource {
                 .headers(HeaderUtil.criarAlerta("especie.atualizado", especieAtualizada.getCodigo().toString()))
                 .body(especieAtualizada);
     }
+
+    /**
+     * DELETE /api/especies : Remover uma espécie.
+     *
+     * @param codigo o código da espécie a ser deletada
+     * @return a ResponseEntity com status 200 (OK)
+     * @throws URISyntaxException se a sintaxe do URI de localização estiver incorreta
+     */
+    @DeleteMapping("/{codigo}")
+    public ResponseEntity<Void> removerEspecie(@PathVariable Long codigo) throws URISyntaxException {
+        this.especieService.remover(codigo);
+
+        return ResponseEntity.ok()
+                .headers(HeaderUtil.criarAlerta("especie.removida", String.valueOf(codigo))).build();
+    }
 }
