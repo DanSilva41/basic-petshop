@@ -88,11 +88,12 @@ public class AnimalResource {
      * @throws URISyntaxException se a sintaxe do URI de localização estiver incorreta
      */
     @DeleteMapping("/{codigo}")
-    public ResponseEntity<Void> removerAnimal(@PathVariable Long codigo) throws URISyntaxException {
+    public ResponseEntity<List<AnimalDTO>> removerAnimal(@PathVariable Long codigo) throws URISyntaxException {
         this.animalService.remover(codigo);
 
         return ResponseEntity.ok()
-                .headers(HeaderUtil.criarAlerta("animal.removido", String.valueOf(codigo))).build();
+                .headers(HeaderUtil.criarAlerta("animal.deletado", codigo.toString()))
+                .body(this.listarAnimais());
     }
 }
 
