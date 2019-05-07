@@ -9,6 +9,7 @@ export class Animal {
   nome: string;
   dataNascimento?: any;
   cor: string;
-  sexoAnimal: string;
+  sexo: string;
   especie: Especie = new Especie();
+  
 }

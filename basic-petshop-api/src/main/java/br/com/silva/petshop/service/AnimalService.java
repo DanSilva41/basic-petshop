@@ -15,6 +15,6 @@ public interface AnimalService {
 
     Optional<AnimalDTO> buscarPorCodigo(Long codigo);
 
-    void remover(Long codigo);
+    void deletar(Long codigo);
 
 }

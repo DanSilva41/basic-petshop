@@ -46,7 +46,7 @@ public class EspecieServiceImpl implements EspecieService {
     }
 
     @Override
-    public void remover(Long codigo) {
+    public void deletar(Long codigo) {
         this.especieRepository.deleteById(codigo);
     }
 }

@@ -15,17 +15,33 @@ export class AnimaisService {
     this.URL = `${environment.apiHost}/api/animais`;
   }
 
-  listarAnimais() {
+  public listarAnimais() {
     return this.http.get<any>(this.URL);
   }
 
-  buscarPeloCodigo(codigo): Promise<Animal> {
+  public buscarPeloCodigo(codigo): Promise<Animal> {
     return this.http.get<any>(`${this.URL}/${codigo}`)
       .toPromise()
       .then(response => response as Animal);
   }
 
-  cadastrar(animal) {
-    return this.http.post<any>(this.URL, animal);
+  public cadastrar(animal: Animal): Promise<Animal> {
+    return this.http.post<any>(this.URL, animal)
+      .toPromise()
+      .then(response => response as Animal );
   }
+
+  public atualizar(animal: Animal): Promise<Animal> {
+    return this.http.put<any>(this.URL, animal)
+      .toPromise()
+      .then(response => response as Animal );
+  }
+
+  public deletar(codigoAnimal: number): Promise<Array<Animal>> {
+    return this.http.delete<any>(`${this.URL}/${codigoAnimal}`)
+      .toPromise()
+      .then(response => response as Array<Animal>);
+  }
+
+
 }

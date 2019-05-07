@@ -25,20 +25,20 @@ public class Animal implements Serializable {
     private Long codigo;
 
     @NotNull
-    @Size(min = 3, max = 120)
-    @Column(name = "nome")
+    @Size(min = 3, max = 60)
+    @Column(name = "nome", length = 60)
     private String nome;
 
     @Column(name = "dt_nascimento")
     private LocalDate dataNascimento;
 
-    @Size(min = 3, max = 120)
-    @Column(name = "cor")
+    @Size(min = 3, max = 60)
+    @Column(name = "cor", length = 60)
     private String cor;
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(name = "sexo", nullable = false)
+    @Column(name = "sexo", nullable = false, length = 5)
     private SexoAnimal sexo;
 
     @NotNull

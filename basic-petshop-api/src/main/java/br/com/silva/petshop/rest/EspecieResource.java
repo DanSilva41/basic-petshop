@@ -31,7 +31,7 @@ public class EspecieResource {
      * @return status 200 (OK) e a lista de todas as espécies
      */
     @GetMapping
-    public List<EspecieDTO> listar() {
+    public List<EspecieDTO> listarEspecies() {
         return this.especieService.buscarTodos();
     }
 
@@ -39,10 +39,10 @@ public class EspecieResource {
      * GET  /api/especies/{codigo} : buscar espécie pelo código.
      *
      * @param codigo o código da espécie a ser buscada
-     * @return a ResponseEntity com status 201 (Criado) e com o corpo da espécie correspondente
+     * @return a ResponseEntity com status 200 (OK) e com o corpo da espécie correspondente
      */
     @GetMapping("/{codigo}")
-    public ResponseEntity<EspecieDTO> buscarPeloCodigo(@PathVariable Long codigo) {
+    public ResponseEntity<EspecieDTO> buscarEspeciePeloCodigo(@PathVariable Long codigo) {
         Optional<EspecieDTO> especieRetornada = this.especieService.buscarPorCodigo(codigo);
         return especieRetornada.isPresent() ? ResponseEntity.ok(especieRetornada.get()) : ResponseEntity.notFound().build();
     }
@@ -55,7 +55,7 @@ public class EspecieResource {
      * @throws URISyntaxException se a sintaxe do URI de localização estiver incorreta
      */
     @PostMapping
-    public ResponseEntity<EspecieDTO> cadastrar(@Valid @RequestBody EspecieDTO especieDTO) throws URISyntaxException {
+    public ResponseEntity<EspecieDTO> cadastrarEspecie(@Valid @RequestBody EspecieDTO especieDTO) throws URISyntaxException {
         EspecieDTO especieSalva = this.especieService.salvar(especieDTO);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}").buildAndExpand(especieSalva.getCodigo()).toUri();
@@ -81,17 +81,18 @@ public class EspecieResource {
     }
 
     /**
-     * DELETE /api/especies : Remover uma espécie.
+     * DELETE /api/especies : Deletar uma espécie.
      *
      * @param codigo o código da espécie a ser deletada
-     * @return a ResponseEntity com status 200 (OK)
+     * @return a ResponseEntity com status 200 (OK) e a lista de todas as espécies
      * @throws URISyntaxException se a sintaxe do URI de localização estiver incorreta
      */
     @DeleteMapping("/{codigo}")
-    public ResponseEntity<Void> removerEspecie(@PathVariable Long codigo) throws URISyntaxException {
-        this.especieService.remover(codigo);
+    public ResponseEntity<List<EspecieDTO>> deletarEspecie(@PathVariable Long codigo) throws URISyntaxException {
+        this.especieService.deletar(codigo);
 
         return ResponseEntity.ok()
-                .headers(HeaderUtil.criarAlerta("especie.removida", String.valueOf(codigo))).build();
+                .headers(HeaderUtil.criarAlerta("especie.deletada", codigo.toString()))
+                .body(this.listarEspecies());
     }
 }

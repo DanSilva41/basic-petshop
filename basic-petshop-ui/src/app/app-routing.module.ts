@@ -7,7 +7,7 @@ import {DashboardModule} from './dashboard/dashboard.module';
 import {EspeciesModule} from "./especies/especies.module";
 
 
-const routes: Routes = [
+const APP_ROUTES: Routes = [
   {path: 'animais', loadChildren: () => AnimaisModule},
   {path: 'especies', loadChildren: () => EspeciesModule},
   {path: 'login', loadChildren: () => LoginModule},
@@ -20,7 +20,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(APP_ROUTES)
   ],
   exports: [RouterModule]
 })

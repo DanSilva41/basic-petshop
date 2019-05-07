@@ -1,4 +1,4 @@
-package br.com.silva.petshop.config.cors;
+package br.com.silva.petshop.config;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -13,8 +13,6 @@ import java.io.IOException;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter {
 
-    private String originPermitida = "http://localhost:4200"; // TODO: Configurar para diferentes ambientes
-
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
             throws IOException, ServletException {
@@ -22,10 +20,10 @@ public class CorsFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
 
-        response.setHeader("Access-Control-Allow-Origin", originPermitida);
+        response.setHeader("Access-Control-Allow-Origin", BasicPetshopProperty.ORIGEM_PERMITIDA);
         response.setHeader("Access-Control-Allow-Credentials", "true");
 
-        if ("OPTIONS".equals(request.getMethod()) && originPermitida.equals(request.getHeader("Origin"))) {
+        if ("OPTIONS".equals(request.getMethod()) && BasicPetshopProperty.ORIGEM_PERMITIDA.equals(request.getHeader("Origin"))) {
             response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT, OPTIONS");
             response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept");
             response.setHeader("Access-Control-Max-Age", "3600");

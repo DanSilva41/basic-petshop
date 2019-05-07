@@ -39,7 +39,7 @@ public class AnimalResource {
      * GET  /api/animais/{codigo} : buscar animal pelo código.
      *
      * @param codigo o código do animal a ser buscado
-     * @return a ResponseEntity com status 201 (Criado) e com o corpo do animal correspondente
+     * @return a ResponseEntity com status 200 (OK) e com o corpo do animal correspondente
      */
     @GetMapping("/{codigo}")
     public ResponseEntity<AnimalDTO> buscarAnimalPeloCodigo(@PathVariable Long codigo) {
@@ -51,7 +51,7 @@ public class AnimalResource {
      * POST  /api/animais : Cria um novo animal.
      *
      * @param animalDTO o animal a ser criado
-     * @return a ResponseEntity com status 201 (Criado) e com o corpo do novo animal
+     *@return a ResponseEntity com status 201 (Criado) e com o corpo do novo animal
      * @throws URISyntaxException se a sintaxe do URI de localização estiver incorreta
      */
     @PostMapping
@@ -81,15 +81,15 @@ public class AnimalResource {
     }
 
     /**
-     * DELETE /api/animais : Remover um animal.
+     * DELETE /api/animais : deletar um animal.
      *
      * @param codigo o código animal a ser deletado
-     * @return a ResponseEntity com status 200 (OK)
+     * @return a ResponseEntity com status 200 (OK) e a lista de todos os animais
      * @throws URISyntaxException se a sintaxe do URI de localização estiver incorreta
      */
     @DeleteMapping("/{codigo}")
-    public ResponseEntity<List<AnimalDTO>> removerAnimal(@PathVariable Long codigo) throws URISyntaxException {
-        this.animalService.remover(codigo);
+    public ResponseEntity<List<AnimalDTO>> deletarAnimal(@PathVariable Long codigo) throws URISyntaxException {
+        this.animalService.deletar(codigo);
 
         return ResponseEntity.ok()
                 .headers(HeaderUtil.criarAlerta("animal.deletado", codigo.toString()))

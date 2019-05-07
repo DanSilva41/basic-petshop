@@ -15,6 +15,6 @@ public interface EspecieService {
 
     Optional<EspecieDTO> buscarPorCodigo(Long codigo);
 
-    void remover(Long codigo);
+    void deletar(Long codigo);
 }
 

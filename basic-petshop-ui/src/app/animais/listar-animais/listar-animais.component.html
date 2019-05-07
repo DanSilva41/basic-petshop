@@ -6,7 +6,7 @@
                 <div class="body block-header">
                    <div class="row">
                       <div class="col-lg-6 col-md-8 col-sm-12">
-                         <h2>Lista de Animais</h2>
+                         <h2>{{ tituloPagina }}</h2>
                          <ul class="breadcrumb p-l-0 p-b-0 ">
                             <li class="breadcrumb-item"><a routerLink="" href="index.html"><i class="icon-home"></i></a></li>
                             <li class="breadcrumb-item active">Animais</li>
@@ -26,16 +26,8 @@
           <div class="col-lg-12 col-md-12 col-sm-12">
              <div class="card">
                 <div class="header">
-                   <h2><strong>Lista</strong> Animais <small>Abaixo estarão listados todos os animais cadastrados ativos</small> </h2>
+                   <h2><small>Abaixo estarão listados todos os animais cadastrados</small> </h2>
                    <ul class="header-dropdown">
-                      <li class="dropdown">
-                         <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="zmdi zmdi-more"></i> </a>
-                         <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href="javascript:void(0);">Action</a></li>
-                            <li><a href="javascript:void(0);">Another action</a></li>
-                            <li><a href="javascript:void(0);">Something else</a></li>
-                         </ul>
-                      </li>
                       <li class="remove">
                          <a role="button" class="boxs-close"><i class="zmdi zmdi-close"></i></a>
                       </li>
@@ -66,13 +58,7 @@
                               <td>
                                  <div class="btn-group flex-btn-group-container">
                                      <button type="submit"
-                                             [routerLink]="['/', animal.codigo]"
-                                             class="btn btn-info btn-sm">
-                                         <span class="fa fa-eye"></span>
-                                         <span class="hidden-md-down">Visualizar</span>
-                                     </button>
-                                     <button type="submit"
-                                             [routerLink]="['/', { outlets: { popup: 'user-management/'+ animal.codigo + '/edit'} }]"
+                                             [routerLink]="[animal.codigo]"
                                              replaceUrl="true"
                                              class="btn btn-primary btn-sm">
                                          <span class="fa fa-pencil"></span>

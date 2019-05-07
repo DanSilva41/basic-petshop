@@ -46,7 +46,7 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
-    public void remover(Long codigo) {
+    public void deletar(Long codigo) {
         this.animalRepository.deleteById(codigo);
     }
 

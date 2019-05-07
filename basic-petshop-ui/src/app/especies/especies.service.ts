@@ -25,7 +25,21 @@ export class EspeciesService {
       .then(response => response as Especie);
   }
 
-  cadastrar(especie) {
-    return this.http.post<any>(this.URL, especie);
+  cadastrar(especie): Promise<Especie> {
+    return this.http.post<any>(this.URL, especie)
+      .toPromise()
+      .then(response => response as Especie );;
+  }
+
+  atualizar(especie): Promise<Especie> {
+    return this.http.put<any>(this.URL, especie)
+      .toPromise()
+      .then(response => response as Especie );;
+  }
+
+  deletar(codigoEspecie: number): Promise<Array<Especie>> {
+    return this.http.delete<any>(`${this.URL}/${codigoEspecie}`)
+      .toPromise()
+      .then(response => response as Array<Especie>);
   }
 }

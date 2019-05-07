@@ -10,7 +10,6 @@ import { LoginService } from "../login/login.service";
 import { EspeciesService} from "../especies/especies.service";
 import { ConfirmationModalService } from "../shared/confirmation-modal/confirmation-modal.service";
 import { ConfirmationModalComponent } from "../shared/confirmation-modal/confirmation-modal.component";
-import { AppComponent } from "../app.component";
 
 @NgModule({
     imports: [
@@ -25,7 +24,6 @@ import { AppComponent } from "../app.component";
       PaginaNaoEncontradaComponent,
       ConfirmationModalComponent
     ],
-    bootstrap:    [ AppComponent ],
     exports: [
         NavbarComponent,
         TopnavbarComponent,

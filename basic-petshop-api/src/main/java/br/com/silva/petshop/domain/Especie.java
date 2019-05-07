@@ -20,12 +20,12 @@ public class Especie implements Serializable {
     private Long codigo;
 
     @NotNull
-    @Size(min = 3, max = 120)
-    @Column(name = "nome", unique = true, nullable = false)
+    @Size(min = 3, max = 60)
+    @Column(name = "nome", length = 60, unique = true, nullable = false)
     private String nome;
 
-    @Size(min = 5, max = 255)
-    @Column(name = "descricao")
+    @Size(min = 5, max = 100)
+    @Column(name = "descricao", length = 100)
     private String descricao;
 
     public Especie() {

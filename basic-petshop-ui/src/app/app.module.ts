@@ -5,6 +5,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {CoreModule} from './core/core.module';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {LoginModule} from "./login/login.module";
+import { ShareModule } from './shared/shared.module';
+
 
 @NgModule({
   declarations: [
