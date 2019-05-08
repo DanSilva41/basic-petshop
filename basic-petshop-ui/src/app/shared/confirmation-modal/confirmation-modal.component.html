@@ -1,0 +1,28 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ title }}</h4>
+    <button type="button" class="close" aria-label="Fechar" (click)="activeModal.dismiss('closed')">
+    <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<hr>
+<div class="modal-body">
+    <div class="row justify-content-center">
+        <p style="font-size: 18px">{{ message }} </p>
+        <table class="table table-bordered text-center">
+            <thead>
+              <tr>
+                <th scope="col" *ngFor="let item of objeto | keyvalue">{{ item.key }}</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="col" *ngFor="let item of objeto | keyvalue">{{ item.value }}</th>
+                </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="declinar()">{{ btnCancelText }}</button>
+    <button type="button" class="btn btn-primary" (click)="aceitar()">{{ btnOkText }}</button>
+</div>

@@ -7,13 +7,15 @@ import { LoginService} from './login.service';
 import { AuthComponent } from './auth/auth.component';
 import { LoginRoutingModule } from './login-routing.module';
 import { FormsModule } from "@angular/forms";
+import { MatSnackBarModule } from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
     LoginRoutingModule,
-    FormsModule
+    FormsModule,
+    MatSnackBarModule
   ],
   exports: [
     AuthComponent

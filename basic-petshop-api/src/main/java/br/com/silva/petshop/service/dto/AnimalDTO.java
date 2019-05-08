@@ -3,9 +3,11 @@ package br.com.silva.petshop.service.dto;
 import br.com.silva.petshop.domain.Animal;
 import br.com.silva.petshop.domain.Especie;
 import br.com.silva.petshop.domain.enums.SexoAnimal;
+import br.com.silva.petshop.service.mapper.EspecieMapper;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
@@ -19,7 +21,7 @@ public class AnimalDTO {
 
     private Long codigo;
 
-    @NotNull
+    @NotNull(message = "{animal.nome.not.null}")
     @Size(min = 3, max = 120)
     private String nome;
 
@@ -30,11 +32,12 @@ public class AnimalDTO {
     @Size(min = 3, max = 120)
     private String cor;
 
-    @NotNull
+    @NotNull(message = "{animal.sexo.not.null}")
     private SexoAnimal sexo;
 
-    @NotNull
-    private Especie especie;
+    @Valid
+    @NotNull(message = "{animal.especie.not.null}")
+    private EspecieDTO especieDTO;
 
     public AnimalDTO() {
         // Construtor vazio é necessário
@@ -46,7 +49,7 @@ public class AnimalDTO {
         this.dataNascimento = animal.getDataNascimento();
         this.cor = animal.getCor();
         this.sexo = animal.getSexo();
-        this.especie = animal.getEspecie();
+        this.especieDTO = animal.getEspecie() != null && animal.getEspecie().getCodigo() != null ? new EspecieDTO(animal.getEspecie()) : null;
     }
 
     public Long getCodigo() {
@@ -89,12 +92,12 @@ public class AnimalDTO {
         this.sexo = sexo;
     }
 
-    public Especie getEspecie() {
-        return especie;
+    public EspecieDTO getEspecieDTO() {
+        return especieDTO;
     }
 
-    public void setEspecie(Especie especie) {
-        this.especie = especie;
+    public void setEspecieDTO(EspecieDTO especieDTO) {
+        this.especieDTO = especieDTO;
     }
 
     @Override
@@ -105,7 +108,7 @@ public class AnimalDTO {
                 ", dataNascimento=" + dataNascimento +
                 ", cor='" + cor + '\'' +
                 ", sexo=" + sexo +
-                ", especie=" + especie +
+                ", especie=" + especieDTO +
                 '}';
     }
 }

@@ -14,7 +14,7 @@ public class EspecieDTO {
 
     private Long codigo;
 
-    @NotNull
+    @NotNull(message = "{especie.nome.not.null}")
     @Size(min = 3, max = 120)
     private String nome;
 

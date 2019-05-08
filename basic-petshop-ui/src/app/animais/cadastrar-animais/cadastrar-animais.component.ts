@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { EspeciesService } from 'src/app/especies/especies.service';
 import { MessageService } from 'src/app/shared/message/message.service';
 import { Title } from '@angular/platform-browser';
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 
 @Component({
   selector: 'app-cadastrar-animais',
@@ -22,6 +23,7 @@ export class CadastrarAnimaisComponent implements OnInit {
   constructor(private animaisService: AnimaisService,
               private especiesService: EspeciesService,
               private messageService: MessageService,
+              private errorHandler: ErrorHandlerService,
               private route: ActivatedRoute,
               private router: Router,
               private title: Title) { }
@@ -44,7 +46,8 @@ export class CadastrarAnimaisComponent implements OnInit {
           this.animal = animalRetornado;
           this.isEdicao = true;
           this.tituloPagina = "Edição de Animal: "+ animalRetornado.nome;
-        });
+        })
+        .catch(erro => this.errorHandler.handle(erro));
   }
 
   salvar() {
@@ -60,7 +63,8 @@ export class CadastrarAnimaisComponent implements OnInit {
       .then(animalCadastrado => {
         this.messageService.mensagemSucesso('Animal cadastrado com sucesso!');
         this.redirecionarLista();
-      });
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   private atualizarEspecie() {
@@ -68,7 +72,8 @@ export class CadastrarAnimaisComponent implements OnInit {
       .then(animalAtualizado => {
         this.messageService.mensagemSucesso('Animal atualizado com sucesso!');
         this.redirecionarLista();
-      });
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   private listarEspecies() {

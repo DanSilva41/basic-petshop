@@ -10,6 +10,7 @@ import { LoginService } from "../login/login.service";
 import { EspeciesService} from "../especies/especies.service";
 import { ConfirmationModalService } from "../shared/confirmation-modal/confirmation-modal.service";
 import { ConfirmationModalComponent } from "../shared/confirmation-modal/confirmation-modal.component";
+import { ErrorHandlerService } from "./error-handler.service";
 
 @NgModule({
     imports: [
@@ -35,7 +36,8 @@ import { ConfirmationModalComponent } from "../shared/confirmation-modal/confirm
         EspeciesService,
         LoginService,
         
-        ConfirmationModalService
+        ConfirmationModalService,
+        ErrorHandlerService
     ],
     entryComponents: [ ConfirmationModalComponent ]
 })

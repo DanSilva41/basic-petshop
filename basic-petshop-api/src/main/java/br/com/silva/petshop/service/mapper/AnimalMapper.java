@@ -2,6 +2,7 @@ package br.com.silva.petshop.service.mapper;
 
 import br.com.silva.petshop.domain.Animal;
 import br.com.silva.petshop.service.dto.AnimalDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,9 @@ import java.util.stream.Collectors;
  */
 @Service
 public class AnimalMapper {
+
+    @Autowired
+    private EspecieMapper especieMapper;
 
     public AnimalDTO animalParaAnimalDTO(Animal animal) {
         return new AnimalDTO(animal);
@@ -35,7 +39,7 @@ public class AnimalMapper {
             animal.setDataNascimento(animalDTO.getDataNascimento());
             animal.setCor(animalDTO.getCor());
             animal.setSexo(animalDTO.getSexo());
-            animal.setEspecie(animalDTO.getEspecie());
+            animal.setEspecie(especieMapper.especieDTOTParaEspecie(animalDTO.getEspecieDTO()));
             return animal;
         }
     }

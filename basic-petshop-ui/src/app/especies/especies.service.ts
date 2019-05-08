@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 
 import {environment} from '../../environments/environment';
 import { Especie } from '../core/models';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +26,8 @@ export class EspeciesService {
       .then(response => response as Especie);
   }
 
-  cadastrar(especie): Promise<Especie> {
-    return this.http.post<any>(this.URL, especie)
-      .toPromise()
-      .then(response => response as Especie );;
+  cadastrar(especie): Observable<any> {
+    return this.http.post<any>(this.URL, especie);
   }
 
   atualizar(especie): Promise<Especie> {

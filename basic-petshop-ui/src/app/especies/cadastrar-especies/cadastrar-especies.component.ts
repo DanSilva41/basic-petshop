@@ -4,6 +4,7 @@ import {EspeciesService} from "../especies.service";
 import { ActivatedRoute, Router } from '@angular/router';
 import { MessageService } from 'src/app/shared/message/message.service';
 import { Title } from '@angular/platform-browser';
+import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 
 @Component({
   selector: 'app-cadastrar-especies',
@@ -18,6 +19,7 @@ export class CadastrarEspeciesComponent implements OnInit {
 
   constructor(private especiesService: EspeciesService,
               private messageService: MessageService,
+              private errorHandler: ErrorHandlerService,
               private title: Title,
               private route: ActivatedRoute,
               private router: Router) {
@@ -52,10 +54,10 @@ export class CadastrarEspeciesComponent implements OnInit {
   }
   private cadastrarAnimal() {
     this.especiesService.cadastrar(this.especie)
-      .then(especieCadastrada => {
+      .subscribe(especieCadastrada => {
         this.messageService.mensagemSucesso('Espécie cadastrada com sucesso!');
         this.redirecionarLista();
-      });
+      }, (response) => this.errorHandler.handle(response));
   }
 
   private atualizarAnimal() {

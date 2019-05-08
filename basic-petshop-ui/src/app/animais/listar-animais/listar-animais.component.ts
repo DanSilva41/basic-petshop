@@ -31,7 +31,7 @@ export class ListarAnimaisComponent implements OnInit {
     this.animaisService.listarAnimais().subscribe(response => this.animais = response);
   } 
 
-  private openConfirmationModal(animal: Animal) {
+  openConfirmationModal(animal: Animal) {
     let objetoCustomizado = this.retornarPropriedadesCustomizadas(animal);
     this.confirmationModalService.confirmar('Confirmação de exclusão', 'Você realmente deseja excluir este animal?', objetoCustomizado)
       .then((confirmado) => {
@@ -42,7 +42,7 @@ export class ListarAnimaisComponent implements OnInit {
           });
       })
       .catch(() => 
-        console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'));
+        console.log('O usuário descartou a caixa de diálogo (por exemplo, usando ESC, clicando no ícone de cruz ou clicando fora da caixa de diálogo)'));
   }
 
   private retornarPropriedadesCustomizadas(animal: Animal) {
@@ -51,7 +51,7 @@ export class ListarAnimaisComponent implements OnInit {
       "Nome": animal.nome,
       "Data de Nascimento": animal.dataNascimento,
       "Sexo": animal.sexo,
-      "Espécie": animal.especie.nome
+      "Espécie": animal.especieDTO.nome
     }
     return objetoCustomizado;
   }

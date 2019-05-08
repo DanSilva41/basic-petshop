@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { Animal } from '../core/models';
@@ -27,8 +27,7 @@ export class AnimaisService {
 
   public cadastrar(animal: Animal): Promise<Animal> {
     return this.http.post<any>(this.URL, animal)
-      .toPromise()
-      .then(response => response as Animal );
+      .toPromise();
   }
 
   public atualizar(animal: Animal): Promise<Animal> {
