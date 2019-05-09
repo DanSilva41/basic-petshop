@@ -1,19 +1,19 @@
 package br.com.silva.petshop.service;
 
-import br.com.silva.petshop.service.dto.AnimalDTO;
+import br.com.silva.petshop.domain.Animal;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface AnimalService {
 
-    AnimalDTO salvar(AnimalDTO animalDTO);
+    Animal salvar(Animal animal);
 
-    AnimalDTO atualizar(AnimalDTO animalDTO);
+    Animal atualizar(Animal animal);
 
-    List<AnimalDTO> buscarTodos();
+    List<Animal> buscarTodos();
 
-    Optional<AnimalDTO> buscarPorCodigo(Long codigo);
+    Optional<Animal> buscarPorCodigo(Long codigo);
 
     void deletar(Long codigo);
 

@@ -51,7 +51,7 @@ export class ListarAnimaisComponent implements OnInit {
       "Nome": animal.nome,
       "Data de Nascimento": animal.dataNascimento,
       "Sexo": animal.sexo,
-      "Espécie": animal.especieDTO.nome
+      "Espécie": animal.especie.nome
     }
     return objetoCustomizado;
   }

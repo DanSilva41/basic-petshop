@@ -42,7 +42,8 @@ export class CadastrarEspeciesComponent implements OnInit {
           this.especie = especieRetornada;
           this.isEdicao = true;
           this.tituloPagina = "Edição de Espécie: "+ especieRetornada.nome;
-        });
+        })
+        .catch(erro => this.errorHandler.handle(erro));
   }
 
   salvar() {
@@ -65,7 +66,8 @@ export class CadastrarEspeciesComponent implements OnInit {
       .then(especieAtualizada => {
         this.messageService.mensagemSucesso('Espécie atualizada com sucesso!');
         this.redirecionarLista();
-      });
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   private redirecionarLista() {

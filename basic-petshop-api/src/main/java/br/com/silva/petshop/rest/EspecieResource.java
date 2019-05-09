@@ -1,8 +1,8 @@
 package br.com.silva.petshop.rest;
 
+import br.com.silva.petshop.domain.Especie;
 import br.com.silva.petshop.rest.util.HeaderUtil;
 import br.com.silva.petshop.service.EspecieService;
-import br.com.silva.petshop.service.dto.EspecieDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +31,7 @@ public class EspecieResource {
      * @return status 200 (OK) e a lista de todas as espécies
      */
     @GetMapping
-    public List<EspecieDTO> listarEspecies() {
+    public List<Especie> listarEspecies() {
         return this.especieService.buscarTodos();
     }
 
@@ -42,21 +42,21 @@ public class EspecieResource {
      * @return a ResponseEntity com status 200 (OK) e com o corpo da espécie correspondente
      */
     @GetMapping("/{codigo}")
-    public ResponseEntity<EspecieDTO> buscarEspeciePeloCodigo(@PathVariable Long codigo) {
-        Optional<EspecieDTO> especieRetornada = this.especieService.buscarPorCodigo(codigo);
+    public ResponseEntity<Especie> buscarEspeciePeloCodigo(@PathVariable Long codigo) {
+        Optional<Especie> especieRetornada = this.especieService.buscarPorCodigo(codigo);
         return especieRetornada.isPresent() ? ResponseEntity.ok(especieRetornada.get()) : ResponseEntity.notFound().build();
     }
 
     /**
      * POST  /api/especies : Cria uma nova espécie.
      *
-     * @param especieDTO a espécie a ser criada
+     * @param especie a espécie a ser criada
      * @return a ResponseEntity com status 201 (Criado) e com o corpo da nova espécie
      * @throws URISyntaxException se a sintaxe do URI de localização estiver incorreta
      */
     @PostMapping
-    public ResponseEntity<EspecieDTO> cadastrarEspecie(@Valid @RequestBody EspecieDTO especieDTO) throws URISyntaxException {
-        EspecieDTO especieSalva = this.especieService.salvar(especieDTO);
+    public ResponseEntity<Especie> cadastrarEspecie(@Valid @RequestBody Especie especie) throws URISyntaxException {
+        Especie especieSalva = this.especieService.salvar(especie);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}").buildAndExpand(especieSalva.getCodigo()).toUri();
         return ResponseEntity.created(uri)
@@ -67,13 +67,13 @@ public class EspecieResource {
     /**
      * PUT  /api/especies : Atualizar uma espécie.
      *
-     * @param especieDTO a espécie a ser atualizada
+     * @param especie a espécie a ser atualizada
      * @return a ResponseEntity com status 200 (OK) e com o corpo da espécie atualizado
      * @throws URISyntaxException se a sintaxe do URI de localização estiver incorreta
      */
     @PutMapping
-    public ResponseEntity<EspecieDTO> atualizarEspecie(@RequestBody @Valid EspecieDTO especieDTO) throws URISyntaxException {
-        EspecieDTO especieAtualizada = this.especieService.atualizar(especieDTO);
+    public ResponseEntity<Especie> atualizarEspecie(@RequestBody @Valid Especie especie) throws URISyntaxException {
+        Especie especieAtualizada = this.especieService.atualizar(especie);
 
         return ResponseEntity.ok()
                 .headers(HeaderUtil.criarAlerta("especie.atualizado", especieAtualizada.getCodigo().toString()))
@@ -88,7 +88,7 @@ public class EspecieResource {
      * @throws URISyntaxException se a sintaxe do URI de localização estiver incorreta
      */
     @DeleteMapping("/{codigo}")
-    public ResponseEntity<List<EspecieDTO>> deletarEspecie(@PathVariable Long codigo) throws URISyntaxException {
+    public ResponseEntity<List<Especie>> deletarEspecie(@PathVariable Long codigo) throws URISyntaxException {
         this.especieService.deletar(codigo);
 
         return ResponseEntity.ok()

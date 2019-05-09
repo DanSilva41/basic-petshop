@@ -19,7 +19,7 @@ public class Especie implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
 
-    @NotNull
+    @NotNull(message = "{especie.nome.not.null}")
     @Size(min = 3, max = 60)
     @Column(name = "nome", length = 60, unique = true, nullable = false)
     private String nome;

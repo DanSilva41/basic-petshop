@@ -1,8 +1,8 @@
 package br.com.silva.petshop.rest;
 
+import br.com.silva.petshop.domain.Animal;
 import br.com.silva.petshop.rest.util.HeaderUtil;
 import br.com.silva.petshop.service.AnimalService;
-import br.com.silva.petshop.service.dto.AnimalDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +31,7 @@ public class AnimalResource {
      * @return status 200 (OK) e a lista de todos os animais
      */
     @GetMapping
-    public List<AnimalDTO> listarAnimais() {
+    public List<Animal> listarAnimais() {
         return this.animalService.buscarTodos();
     }
 
@@ -42,21 +42,21 @@ public class AnimalResource {
      * @return a ResponseEntity com status 200 (OK) e com o corpo do animal correspondente
      */
     @GetMapping("/{codigo}")
-    public ResponseEntity<AnimalDTO> buscarAnimalPeloCodigo(@PathVariable Long codigo) {
-        Optional<AnimalDTO> animalRetornado = this.animalService.buscarPorCodigo(codigo);
+    public ResponseEntity<Animal> buscarAnimalPeloCodigo(@PathVariable Long codigo) {
+        Optional<Animal> animalRetornado = this.animalService.buscarPorCodigo(codigo);
         return animalRetornado.isPresent() ? ResponseEntity.ok(animalRetornado.get()) : ResponseEntity.notFound().build();
     }
 
     /**
      * POST  /api/animais : Cria um novo animal.
      *
-     * @param animalDTO o animal a ser criado
+     * @param animal o animal a ser criado
      *@return a ResponseEntity com status 201 (Criado) e com o corpo do novo animal
      * @throws URISyntaxException se a sintaxe do URI de localização estiver incorreta
      */
     @PostMapping
-    public ResponseEntity<AnimalDTO> cadastrarAnimal(@RequestBody @Valid AnimalDTO animalDTO) throws URISyntaxException {
-        AnimalDTO animalSalvo = this.animalService.salvar(animalDTO);
+    public ResponseEntity<Animal> cadastrarAnimal(@RequestBody @Valid Animal animal) throws URISyntaxException {
+        Animal animalSalvo = this.animalService.salvar(animal);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}").buildAndExpand(animalSalvo.getCodigo()).toUri();
         return ResponseEntity.created(uri)
@@ -67,13 +67,13 @@ public class AnimalResource {
     /**
      * PUT  /api/animais : Atualizar um animal.
      *
-     * @param animalDTO o animal a ser atualizado
+     * @param animal o animal a ser atualizado
      * @return a ResponseEntity com status 200 (OK) e com o corpo do animal atualizado
      * @throws URISyntaxException se a sintaxe do URI de localização estiver incorreta
      */
     @PutMapping
-    public ResponseEntity<AnimalDTO> atualizarAnimal(@RequestBody @Valid AnimalDTO animalDTO) throws URISyntaxException {
-        AnimalDTO animalAtualizado = this.animalService.atualizar(animalDTO);
+    public ResponseEntity<Animal> atualizarAnimal(@RequestBody @Valid Animal animal) throws URISyntaxException {
+        Animal animalAtualizado = this.animalService.atualizar(animal);
 
         return ResponseEntity.ok()
                 .headers(HeaderUtil.criarAlerta("animal.atualizado", animalAtualizado.getCodigo().toString()))
@@ -88,7 +88,7 @@ public class AnimalResource {
      * @throws URISyntaxException se a sintaxe do URI de localização estiver incorreta
      */
     @DeleteMapping("/{codigo}")
-    public ResponseEntity<List<AnimalDTO>> deletarAnimal(@PathVariable Long codigo) throws URISyntaxException {
+    public ResponseEntity<List<Animal>> deletarAnimal(@PathVariable Long codigo) throws URISyntaxException {
         this.animalService.deletar(codigo);
 
         return ResponseEntity.ok()

@@ -1,19 +1,19 @@
 package br.com.silva.petshop.service;
 
-import br.com.silva.petshop.service.dto.EspecieDTO;
+import br.com.silva.petshop.domain.Especie;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface EspecieService {
 
-    EspecieDTO salvar(EspecieDTO especieDTO);
+    Especie salvar(Especie Especie);
 
-    EspecieDTO atualizar(EspecieDTO especieDTO);
+    Especie atualizar(Especie Especie);
 
-    List<EspecieDTO> buscarTodos();
+    List<Especie> buscarTodos();
 
-    Optional<EspecieDTO> buscarPorCodigo(Long codigo);
+    Optional<Especie> buscarPorCodigo(Long codigo);
 
     void deletar(Long codigo);
 }

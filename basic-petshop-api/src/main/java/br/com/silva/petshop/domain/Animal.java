@@ -24,7 +24,7 @@ public class Animal implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
 
-    @NotNull
+    @NotNull(message = "{animal.nome.not.null}")
     @Size(min = 3, max = 60)
     @Column(name = "nome", length = 60)
     private String nome;
@@ -36,12 +36,12 @@ public class Animal implements Serializable {
     @Column(name = "cor", length = 60)
     private String cor;
 
-    @NotNull
+    @NotNull(message = "{animal.sexo.not.null}")
     @Enumerated(EnumType.STRING)
     @Column(name = "sexo", nullable = false, length = 5)
     private SexoAnimal sexo;
 
-    @NotNull
+    @NotNull(message = "{animal.especie.not.null}")
     @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name="codigo_especie")

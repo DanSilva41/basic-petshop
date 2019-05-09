@@ -51,6 +51,10 @@ export class CadastrarAnimaisComponent implements OnInit {
   }
 
   salvar() {
+    if(this.animal.especie.codigo == 0) {
+      this.messageService.mensagemAlerta("Alguma espécie deve ser selecionada!");
+      return;
+    }
     if(this.isEdicao) {
       this.atualizarEspecie();
     } else {

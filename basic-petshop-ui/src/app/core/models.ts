@@ -10,6 +10,6 @@ export class Animal {
   dataNascimento?: any;
   cor: string;
   sexo: string;
-  especieDTO: Especie = new Especie();
+  especie: Especie = new Especie();
   
 }

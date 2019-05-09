@@ -3,8 +3,6 @@ package br.com.silva.petshop.service.impl;
 import br.com.silva.petshop.domain.Especie;
 import br.com.silva.petshop.repository.EspecieRepository;
 import br.com.silva.petshop.service.EspecieService;
-import br.com.silva.petshop.service.dto.EspecieDTO;
-import br.com.silva.petshop.service.mapper.EspecieMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,30 +17,25 @@ public class EspecieServiceImpl implements EspecieService {
     @Autowired
     private EspecieRepository especieRepository;
 
-    @Autowired
-    private EspecieMapper especieMapper;
-
     @Override
-    public EspecieDTO salvar(EspecieDTO especieDTO) {
-        Especie especie = especieMapper.especieDTOTParaEspecie(especieDTO);
-        return especieMapper.especieParaEspecieDTO(this.especieRepository.save(especie));
+    public Especie salvar(Especie especie) {
+        return this.especieRepository.save(especie);
     }
 
     @Override
-    public EspecieDTO atualizar(EspecieDTO especieDTO) {
-        Especie especie = especieMapper.especieDTOTParaEspecie(especieDTO);
-        return especieMapper.especieParaEspecieDTO(this.especieRepository.saveAndFlush(especie));
+    public Especie atualizar(Especie especie) {
+        return this.especieRepository.saveAndFlush(especie);
     }
 
     @Override
-    public List<EspecieDTO> buscarTodos() {
-        return especieMapper.especiesParaEspecieDTOs(this.especieRepository.findAll());
+    public List<Especie> buscarTodos() {
+        return this.especieRepository.findAll();
     }
 
     @Override
-    public Optional<EspecieDTO> buscarPorCodigo(Long codigo) {
+    public Optional<Especie> buscarPorCodigo(Long codigo) {
         Optional<Especie> especieRetornada = this.especieRepository.findById(codigo);
-        return especieRetornada.isPresent() ? Optional.of(especieMapper.especieParaEspecieDTO(especieRetornada.get())) : Optional.empty();
+        return especieRetornada.isPresent() ? Optional.of(especieRetornada.get()) : Optional.empty();
     }
 
     @Override
