@@ -1,7 +1,7 @@
 # basic-petshop
 Aplicação construída usando Spring Boot 2.1.4, onde a documentação pode ser encontrada em [https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/).
 
-E também com Angular [https://angular.io/](https://angular.io/), na versão 6, através scaffold Angular CLI [https://cli.angular.io/](https://cli.angular.io/)
+E também com Angular [https://angular.io/](https://angular.io/), na versão 6, através do scaffold Angular CLI [https://cli.angular.io/](https://cli.angular.io/)
 
 ## Estrutura
 
