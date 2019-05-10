@@ -14,7 +14,7 @@ import { ErrorHandlerService } from 'src/app/core/error-handler.service';
 })
 export class CadastrarAnimaisComponent implements OnInit {
 
-  private animal = new Animal();
+  private animal;
   private especies: Array<Especie>;
   private sexoAnimal = [{value: 'FEMEA', label: 'FÊMEA'}, {value: 'MACHO', label: 'MACHO'}];
   private isEdicao: boolean;
@@ -36,6 +36,9 @@ export class CadastrarAnimaisComponent implements OnInit {
     
     if(codigoAnimal) {
       this.buscarAnimal(codigoAnimal);
+    } else {
+      this.animal = new Animal();
+      this.animal.especie.codigo = 0;
     }
     this.listarEspecies();
   }

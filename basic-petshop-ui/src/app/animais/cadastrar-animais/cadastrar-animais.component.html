@@ -15,7 +15,6 @@
                           </div>
                           <div class="form-group">
                               <select class="form-control show-tick" name="sexo" [(ngModel)]="animal.sexo">
-                                <option [value]="">Sexo...</option>
                                 <option *ngFor="let s of sexoAnimal" [value]="s.value">{{s.label}}</option>
                               </select>
                           </div>
