@@ -1,10 +1,14 @@
 package br.com.silva.petshop.rest;
 
 import br.com.silva.petshop.domain.Animal;
+import br.com.silva.petshop.jms.ConstantsNameQueue;
 import br.com.silva.petshop.rest.util.HeaderUtil;
 import br.com.silva.petshop.service.AnimalService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -24,6 +28,11 @@ public class AnimalResource {
 
     @Autowired
     private AnimalService animalService;
+
+    @Autowired
+    private JmsTemplate jmsTemplate;
+
+    private static final Logger log = LoggerFactory.getLogger(AnimalResource.class);
 
     /**
      * GET  /api/animais : buscar todos os animais.
@@ -94,6 +103,17 @@ public class AnimalResource {
         return ResponseEntity.ok()
                 .headers(HeaderUtil.criarAlerta("animal.deletado", codigo.toString()))
                 .body(this.listarAnimais());
+    }
+
+    @PostMapping("/enviarParaFila")
+    public ResponseEntity<String> enviarParaFila(@RequestBody String mensagem) throws URISyntaxException {
+        log.info("Antes de enviar para a fila: {}", mensagem);
+
+        this.jmsTemplate.convertAndSend(ConstantsNameQueue.IMPRIMIR_MENSAGEM, mensagem);
+
+        log.info("Já enviada para  a fila!");
+        return ResponseEntity.ok()
+                .body("Enviado com sucesso");
     }
 }
 
