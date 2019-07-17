@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "generate-docs": "compodoc -p src/tsconfig.app.json --theme readthedocs -d documentação-basic -n Athos-web --language pt-BR --hideGenerator --customLogo"
   },
   "private": true,
   "dependencies": {
